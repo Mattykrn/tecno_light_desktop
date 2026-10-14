@@ -25,6 +25,16 @@ if [[ -z "${QT6_CONFIG}" || ! -f "${QT6_CONFIG}" ]]; then
     exit 1
 fi
 QT6_DIR="$(cd "$(dirname "${QT6_CONFIG}")" && pwd)"
+QT_COMPONENTS=(Core Gui Qml Quick QuickControls2)
+QT_COMPONENT_ARGS=()
+for component in "${QT_COMPONENTS[@]}"; do
+    component_config="${QT_WASM_ROOT}/lib/cmake/Qt6${component}/Qt6${component}Config.cmake"
+    if [[ ! -f "${component_config}" ]]; then
+        printf 'error: falta el componente Qt %s (%s)\n' "${component}" "${component_config}" >&2
+        exit 1
+    fi
+    QT_COMPONENT_ARGS+=("-DQt6${component}_DIR=${QT_WASM_ROOT}/lib/cmake/Qt6${component}")
+done
 
 rm -rf "${BUILD_DIR}" "${DIST_DIR}" "${PROJECT_ROOT}/.vercel/output"
 mkdir -p "${DIST_DIR}" "${PROJECT_ROOT}/.vercel/output/static"
@@ -33,6 +43,7 @@ emcmake cmake -S "${PROJECT_ROOT}" -B "${BUILD_DIR}" \
     -DCMAKE_BUILD_TYPE=Release \
     -DQt6_DIR="${QT6_DIR}" \
     -DCMAKE_PREFIX_PATH="${QT_WASM_ROOT}" \
+    "${QT_COMPONENT_ARGS[@]}" \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=OFF
 
 cmake --build "${BUILD_DIR}" --parallel "${BUILD_JOBS:-2}"
