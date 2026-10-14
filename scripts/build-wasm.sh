@@ -32,6 +32,7 @@ mkdir -p "${DIST_DIR}" "${PROJECT_ROOT}/.vercel/output/static"
 emcmake cmake -S "${PROJECT_ROOT}" -B "${BUILD_DIR}" \
     -DCMAKE_BUILD_TYPE=Release \
     -DQt6_DIR="${QT6_DIR}" \
+    -DCMAKE_PREFIX_PATH="${QT_WASM_ROOT}" \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=OFF
 
 cmake --build "${BUILD_DIR}" --parallel "${BUILD_JOBS:-2}"

@@ -61,6 +61,7 @@ jobs:
           fi
           echo "QT_WASM_ROOT=${QT_ROOT_DIR}" >> "${GITHUB_ENV}"
           echo "QT6_CONFIG=${QT6_CONFIG}" >> "${GITHUB_ENV}"
+          echo "Qt6_DIR=$(dirname "${QT6_CONFIG}")" >> "${GITHUB_ENV}"
 
       - name: Build static WebAssembly site
         run: npm run build
