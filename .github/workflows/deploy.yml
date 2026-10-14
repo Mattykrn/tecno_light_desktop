@@ -46,6 +46,9 @@ jobs:
           arch: wasm_singlethread
           cache: true
 
+      - name: Install Qt system build dependencies
+        run: sudo apt-get update && sudo apt-get install --yes zlib1g-dev
+
       - name: Configure Qt SDK path
         shell: bash
         run: |
