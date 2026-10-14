@@ -53,7 +53,14 @@ jobs:
             echo "Qt installer did not set QT_ROOT_DIR" >&2
             exit 1
           fi
+          QT6_CONFIG="$(find "${QT_ROOT_DIR}" -type f -name Qt6Config.cmake -print -quit)"
+          if [[ -z "${QT6_CONFIG}" ]]; then
+            echo "Qt6Config.cmake not found under ${QT_ROOT_DIR}" >&2
+            find "${QT_ROOT_DIR}" -maxdepth 4 -type d -print >&2
+            exit 1
+          fi
           echo "QT_WASM_ROOT=${QT_ROOT_DIR}" >> "${GITHUB_ENV}"
+          echo "QT6_CONFIG=${QT6_CONFIG}" >> "${GITHUB_ENV}"
 
       - name: Build static WebAssembly site
         run: npm run build

@@ -16,17 +16,22 @@ if [[ -z "${QT_WASM_ROOT:-}" ]]; then
 fi
 
 QT_WASM_ROOT="$(cd "${QT_WASM_ROOT}" && pwd)"
-if [[ ! -f "${QT_WASM_ROOT}/lib/cmake/Qt6/Qt6Config.cmake" ]]; then
+QT6_CONFIG="${QT6_CONFIG:-}"
+if [[ -z "${QT6_CONFIG}" ]]; then
+    QT6_CONFIG="$(find "${QT_WASM_ROOT}" -type f -name Qt6Config.cmake -print -quit)"
+fi
+if [[ -z "${QT6_CONFIG}" || ! -f "${QT6_CONFIG}" ]]; then
     printf 'error: no se encontró Qt6Config.cmake dentro de QT_WASM_ROOT=%s\n' "${QT_WASM_ROOT}" >&2
     exit 1
 fi
+QT6_DIR="$(cd "$(dirname "${QT6_CONFIG}")" && pwd)"
 
 rm -rf "${BUILD_DIR}" "${DIST_DIR}" "${PROJECT_ROOT}/.vercel/output"
 mkdir -p "${DIST_DIR}" "${PROJECT_ROOT}/.vercel/output/static"
 
 emcmake cmake -S "${PROJECT_ROOT}" -B "${BUILD_DIR}" \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_PREFIX_PATH="${QT_WASM_ROOT}" \
+    -DQt6_DIR="${QT6_DIR}" \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=OFF
 
 cmake --build "${BUILD_DIR}" --parallel "${BUILD_JOBS:-2}"
