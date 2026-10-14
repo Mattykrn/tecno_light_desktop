@@ -54,6 +54,8 @@ dist/
 └── qtloader.js
 ```
 
+Antes de configurar Qt, el script construye el puerto zlib de Emscripten y le indica a Qt que use ese zlib del sysroot en lugar de su target bundled no disponible en el paquete wasm binario.
+
 También prepara `.vercel/output/` para el comando `vercel deploy --prebuilt`. `npm run build:wasm` y `npm run vercel-build` llaman el mismo script. Las carpetas `build-wasm/`, `dist/` y `.vercel/` son artefactos generados e ignorados por Git.
 
 ## Crear y subir el repositorio

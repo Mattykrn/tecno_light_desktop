@@ -9,6 +9,10 @@ if ! command -v emcmake >/dev/null 2>&1; then
     printf 'error: emcmake no está en PATH. Instala/activa Emscripten 3.1.56.\n' >&2
     exit 1
 fi
+if ! command -v embuilder >/dev/null 2>&1; then
+    printf 'error: embuilder no está en PATH. Activa el emsdk 3.1.56 antes de compilar.\n' >&2
+    exit 1
+fi
 
 if [[ -z "${QT_WASM_ROOT:-}" ]]; then
     printf 'error: define QT_WASM_ROOT con la ruta del kit Qt 6.8.3 wasm_singlethread.\n' >&2
@@ -21,6 +25,11 @@ fi
 
 QT_WASM_ROOT="$(cd "${QT_WASM_ROOT}" && pwd)"
 QT_HOST_PATH="$(cd "${QT_HOST_PATH}" && pwd)"
+if [[ -z "${EMSDK:-}" || ! -d "${EMSDK}/upstream/emscripten/cache/sysroot" ]]; then
+    printf 'error: no se encontró el sysroot de Emscripten. Activa emsdk_env.sh primero.\n' >&2
+    exit 1
+fi
+EMSCRIPTEN_SYSROOT="${EMSDK}/upstream/emscripten/cache/sysroot"
 QT6_CONFIG="${QT6_CONFIG:-}"
 if [[ -z "${QT6_CONFIG}" ]]; then
     QT6_CONFIG="$(find "${QT_WASM_ROOT}" -type f -name Qt6Config.cmake -print -quit)"
@@ -44,9 +53,13 @@ done
 rm -rf "${BUILD_DIR}" "${DIST_DIR}" "${PROJECT_ROOT}/.vercel/output"
 mkdir -p "${DIST_DIR}" "${PROJECT_ROOT}/.vercel/output/static"
 
+embuilder build zlib
+
 emcmake cmake -S "${PROJECT_ROOT}" -B "${BUILD_DIR}" \
     -DCMAKE_BUILD_TYPE=Release \
     -DQt6_DIR="${QT6_DIR}" \
+    -DQT_USE_BUNDLED_BundledZLIB=OFF \
+    -DZLIB_ROOT="${EMSCRIPTEN_SYSROOT}" \
     -DQT_HOST_PATH="${QT_HOST_PATH}" \
     -DCMAKE_PREFIX_PATH="${QT_WASM_ROOT};${QT_HOST_PATH}" \
     "${QT_COMPONENT_ARGS[@]}" \

@@ -55,5 +55,7 @@ if(EMSCRIPTEN)
     target_link_options(tecno_light_desktop PRIVATE
         "-sALLOW_MEMORY_GROWTH=1"
         "-sMAXIMUM_MEMORY=1GB"
+        "-sUSE_ZLIB=1"
     )
+    target_compile_options(tecno_light_desktop PRIVATE "-sUSE_ZLIB=1")
 endif()
