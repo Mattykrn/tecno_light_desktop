@@ -32,13 +32,14 @@ cd "$HOME/emsdk"
 source ./emsdk_env.sh
 ```
 
-2. Instala Qt 6.8.3 con el componente **WebAssembly (single-threaded)** usando Qt Maintenance Tool. En Linux, la ruta habitual es `$HOME/Qt/6.8.3/wasm_singlethread`.
+2. Instala Qt 6.8.3 con los componentes **Desktop GCC 64-bit** y **WebAssembly (single-threaded)** usando Qt Maintenance Tool. El build cruzado necesita las herramientas y dependencias internas del kit host además del target wasm. En Linux, las rutas habituales son `$HOME/Qt/6.8.3/gcc_64` y `$HOME/Qt/6.8.3/wasm_singlethread`.
 
 3. Desde la raíz de este proyecto, compila y prepara la salida estática:
 
 ```sh
 source "$HOME/emsdk/emsdk_env.sh"
 export QT_WASM_ROOT="$HOME/Qt/6.8.3/wasm_singlethread"
+export QT_HOST_PATH="$HOME/Qt/6.8.3/gcc_64"
 npm run build
 ```
 

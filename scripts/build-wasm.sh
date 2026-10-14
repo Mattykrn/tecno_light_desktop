@@ -14,8 +14,13 @@ if [[ -z "${QT_WASM_ROOT:-}" ]]; then
     printf 'error: define QT_WASM_ROOT con la ruta del kit Qt 6.8.3 wasm_singlethread.\n' >&2
     exit 1
 fi
+if [[ -z "${QT_HOST_PATH:-}" ]]; then
+    printf 'error: define QT_HOST_PATH con la instalación Qt host 6.8.3 linux_gcc_64.\n' >&2
+    exit 1
+fi
 
 QT_WASM_ROOT="$(cd "${QT_WASM_ROOT}" && pwd)"
+QT_HOST_PATH="$(cd "${QT_HOST_PATH}" && pwd)"
 QT6_CONFIG="${QT6_CONFIG:-}"
 if [[ -z "${QT6_CONFIG}" ]]; then
     QT6_CONFIG="$(find "${QT_WASM_ROOT}" -type f -name Qt6Config.cmake -print -quit)"
@@ -42,7 +47,8 @@ mkdir -p "${DIST_DIR}" "${PROJECT_ROOT}/.vercel/output/static"
 emcmake cmake -S "${PROJECT_ROOT}" -B "${BUILD_DIR}" \
     -DCMAKE_BUILD_TYPE=Release \
     -DQt6_DIR="${QT6_DIR}" \
-    -DCMAKE_PREFIX_PATH="${QT_WASM_ROOT}" \
+    -DQT_HOST_PATH="${QT_HOST_PATH}" \
+    -DCMAKE_PREFIX_PATH="${QT_WASM_ROOT};${QT_HOST_PATH}" \
     "${QT_COMPONENT_ARGS[@]}" \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=OFF
 

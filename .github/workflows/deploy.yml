@@ -37,6 +37,14 @@ jobs:
           version: 3.1.56
           actions-cache-folder: emsdk-cache
 
+      - name: Install matching Qt host kit
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: 6.8.3
+          target: desktop
+          arch: linux_gcc_64
+          cache: true
+
       - name: Install Qt WebAssembly kit
         id: qt
         uses: jurplel/install-qt-action@v4
@@ -56,6 +64,10 @@ jobs:
             echo "Qt installer did not set QT_ROOT_DIR" >&2
             exit 1
           fi
+          if [[ -z "${QT_HOST_PATH:-}" ]]; then
+            echo "Qt installer did not set QT_HOST_PATH for the wasm cross-build" >&2
+            exit 1
+          fi
           QT6_CONFIG="$(find "${QT_ROOT_DIR}" -type f -name Qt6Config.cmake -print -quit)"
           if [[ -z "${QT6_CONFIG}" ]]; then
             echo "Qt6Config.cmake not found under ${QT_ROOT_DIR}" >&2
@@ -63,6 +75,7 @@ jobs:
             exit 1
           fi
           echo "QT_WASM_ROOT=${QT_ROOT_DIR}" >> "${GITHUB_ENV}"
+          echo "QT_HOST_PATH=${QT_HOST_PATH}" >> "${GITHUB_ENV}"
           echo "QT6_CONFIG=${QT6_CONFIG}" >> "${GITHUB_ENV}"
           echo "Qt6_DIR=$(dirname "${QT6_CONFIG}")" >> "${GITHUB_ENV}"
 
