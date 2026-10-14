@@ -1,0 +1,10 @@
+/build/
+/cmake-build-*/
+/build-wasm/
+/dist/
+/.vercel/
+/node_modules/
+*.wasm
+*.js.mem
+*.data
+*.map

@@ -1,0 +1,145 @@
+[
+  {
+    "id": 101,
+    "name": "Cartelería reglamentaria, preventiva e informativa",
+    "category": "Señalización vial",
+    "description": "Señales reglamentarias, preventivas e informativas bajo pliegos DNV / DPV. Fabricación propia sobre chapa galvanizada y aluminio con láminas retrorreflectivas homologadas.",
+    "price": 0,
+    "stock": -1,
+    "badge": "DNV / DPV · IRAM 3952",
+    "imageUrl": "https://tecno-light-v3-irux.vercel.app/images/carteleria/efed8a3c-6e4d-4d5f-9e20-20d38467c75a.jpg",
+    "gallery": ["https://tecno-light-v3-irux.vercel.app/images/carteleria/efed8a3c-6e4d-4d5f-9e20-20d38467c75a.jpg", "https://tecno-light-v3-irux.vercel.app/images/carteleria/4f20f2f2-398d-44ca-9061-e3ce6b69e98b.jpg"]
+  },
+  {
+    "id": 102,
+    "name": "Cartelería transitoria de obra y desvíos viales",
+    "category": "Señalización vial",
+    "description": "Cartelería para obras viales, zanjeos urbanos, intervenciones en vía pública y desvíos de tránsito conforme a los pliegos DNV / DPV.",
+    "price": 0,
+    "stock": -1,
+    "badge": "Fabricación propia",
+    "imageUrl": "https://tecno-light-v3-irux.vercel.app/images/carteleria/4f20f2f2-398d-44ca-9061-e3ce6b69e98b.jpg",
+    "gallery": ["https://tecno-light-v3-irux.vercel.app/images/carteleria/4f20f2f2-398d-44ca-9061-e3ce6b69e98b.jpg", "https://tecno-light-v3-irux.vercel.app/images/carteleria/efed8a3c-6e4d-4d5f-9e20-20d38467c75a.jpg"]
+  },
+  {
+    "id": 201,
+    "name": "Impresión Digital Retrorreflectiva TrafficJet™ Xpress",
+    "category": "Impresión digital",
+    "description": "Impresión digital directa sobre láminas microprismáticas Avery Dennison con tintas eco-solventes homologadas y curado UV. Durabilidad exterior certificada de 10 a 12 años.",
+    "price": 0,
+    "stock": -1,
+    "badge": "Convertidor Oficial Avery Dennison",
+    "imageUrl": "https://tecno-light-v3-irux.vercel.app/images/trafficjet/gallery/proceso-1-impresion.jpg",
+    "gallery": ["https://tecno-light-v3-irux.vercel.app/images/trafficjet/gallery/proceso-1-impresion.jpg", "https://tecno-light-v3-irux.vercel.app/images/trafficjet/impresion-microprismatica-detalle.jpg"]
+  },
+  {
+    "id": 202,
+    "name": "Rotulación gráfica de vehículos y flotas",
+    "category": "Impresión digital",
+    "description": "Rotulación gráfica de vehículos comerciales, transporte pesado y flotas corporativas con láminas retrorreflectivas y sobrelaminado protector Anti-Graffiti.",
+    "price": 0,
+    "stock": -1,
+    "badge": "Tintas eco-solventes UV",
+    "imageUrl": "https://tecno-light-v3-irux.vercel.app/images/trafficjet/impresion-microprismatica-detalle.jpg",
+    "gallery": ["https://tecno-light-v3-irux.vercel.app/images/trafficjet/impresion-microprismatica-detalle.jpg", "https://tecno-light-v3-irux.vercel.app/images/trafficjet/gallery/proceso-1-impresion.jpg"]
+  },
+  {
+    "id": 301,
+    "name": "Indumentaria de trabajo y alta visibilidad",
+    "category": "EPP e indumentaria",
+    "description": "Ropa de trabajo homologada, indumentaria de alta visibilidad clase 2 y clase 3, prendas térmicas e impermeables para obras civiles, viales e industriales.",
+    "price": 0,
+    "stock": -1,
+    "badge": "Provisión por unidad o volumen",
+    "imageUrl": "",
+    "gallery": []
+  },
+  {
+    "id": 302,
+    "name": "Calzado de seguridad",
+    "category": "EPP e indumentaria",
+    "description": "Calzado con puntera de acero y suela antiperforación, calzado dieléctrico para trabajos eléctricos y botines de cuero antideslizantes.",
+    "price": 0,
+    "stock": -1,
+    "badge": "Equipamiento de protección personal",
+    "imageUrl": "",
+    "gallery": []
+  },
+  {
+    "id": 303,
+    "name": "Protección respiratoria, auditiva, ocular y facial",
+    "category": "EPP e indumentaria",
+    "description": "Semimáscaras con filtros intercambiables, protección auditiva, anteojos de seguridad, antiparras y pantallas faciales para uso industrial.",
+    "price": 0,
+    "stock": -1,
+    "badge": "EPP para uso industrial",
+    "imageUrl": "",
+    "gallery": []
+  },
+  {
+    "id": 304,
+    "name": "Protección en altura y seguridad personal",
+    "category": "EPP e indumentaria",
+    "description": "Arneses de seguridad full body, colas de amarre con absorbedor de energía, guantes y cascos de seguridad clase A, B y E.",
+    "price": 0,
+    "stock": -1,
+    "badge": "Seguridad industrial",
+    "imageUrl": "",
+    "gallery": []
+  },
+  {
+    "id": 401,
+    "name": "Vallas de seguridad y cerramiento",
+    "category": "Alquiler y equipamiento",
+    "description": "Vallas metálicas peatonales, vallas de obra pesadas con elementos reflectivos homologados y pasarelas peatonales con barandas reglamentarias.",
+    "price": 0,
+    "stock": -1,
+    "badge": "Alquiler por jornada, semana o plazo de obra",
+    "imageUrl": "",
+    "gallery": []
+  },
+  {
+    "id": 402,
+    "name": "Balizamiento y señalización luminosa",
+    "category": "Alquiler y equipamiento",
+    "description": "Balizas luminosas autónomas a LED, semáforos viales portátiles y flechas luminosas direccionales para esquemas de desvío.",
+    "price": 0,
+    "stock": -1,
+    "badge": "Servicio en Santa Fe y Rosario",
+    "imageUrl": "https://tecno-light-v3-irux.vercel.app/images/trafficjet/gallery/proceso-1-impresion.jpg",
+    "gallery": ["https://tecno-light-v3-irux.vercel.app/images/trafficjet/gallery/proceso-1-impresion.jpg"]
+  },
+  {
+    "id": 403,
+    "name": "Conos, tambores y dispositivos de delineación",
+    "category": "Alquiler y equipamiento",
+    "description": "Tambores canalizadores retrorreflectivos, conos, delineadores flexibles de PVC y chapones reforzados para cruce de zanjas.",
+    "price": 0,
+    "stock": -1,
+    "badge": "Cotización sin cargo",
+    "imageUrl": "",
+    "gallery": []
+  },
+  {
+    "id": 501,
+    "name": "Instalación y montaje en ruta y ciudad",
+    "category": "Servicios en obra",
+    "description": "Montaje de señalización vertical, cartelería de gran porte, pórticos viales, vallado y balizamiento de obras urbanas.",
+    "price": 0,
+    "stock": -1,
+    "badge": "Cuadrillas capacitadas",
+    "imageUrl": "",
+    "gallery": []
+  },
+  {
+    "id": 502,
+    "name": "Demarcación horizontal",
+    "category": "Servicios en obra",
+    "description": "Demarcación con pintura termoplástica y reflectiva para sendas, cordones y estacionamientos.",
+    "price": 0,
+    "stock": -1,
+    "badge": "Servicio en obra",
+    "imageUrl": "",
+    "gallery": []
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "name": "tecno-light-wasm",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tecno Light Qt for WebAssembly static deployment",
+  "scripts": {
+    "build": "bash scripts/build-wasm.sh",
+    "build:wasm": "bash scripts/build-wasm.sh",
+    "vercel-build": "bash scripts/build-wasm.sh"
+  }
+}

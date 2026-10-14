@@ -1,0 +1,90 @@
+name: Build and deploy Tecno Light WASM
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tecno-light-production
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install matching Emscripten SDK
+        uses: emscripten-core/setup-emsdk@v15
+        with:
+          version: 3.1.56
+          actions-cache-folder: emsdk-cache
+
+      - name: Install Qt WebAssembly kit
+        id: qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: 6.8.3
+          target: wasm
+          arch: wasm_singlethread
+          cache: true
+
+      - name: Configure Qt SDK path
+        shell: bash
+        run: |
+          if [[ -z "${QT_ROOT_DIR:-}" ]]; then
+            echo "Qt installer did not set QT_ROOT_DIR" >&2
+            exit 1
+          fi
+          echo "QT_WASM_ROOT=${QT_ROOT_DIR}" >> "${GITHUB_ENV}"
+
+      - name: Build static WebAssembly site
+        run: npm run build
+
+      - name: Upload production build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: tecno-light-wasm-${{ github.sha }}
+          path: |
+            dist/
+            .vercel/output/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Validate Vercel deployment secrets
+        shell: bash
+        run: |
+          for secret_name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [[ -z "${!secret_name}" ]]; then
+              echo "Missing GitHub Actions secret: ${secret_name}" >&2
+              exit 1
+            fi
+          done
+
+      - name: Link Vercel project
+        shell: bash
+        run: |
+          mkdir -p .vercel
+          printf '{"orgId":"%s","projectId":"%s"}\n' \
+            "${VERCEL_ORG_ID}" "${VERCEL_PROJECT_ID}" \
+            > .vercel/project.json
+
+      - name: Deploy prebuilt production site
+        run: npx --yes vercel@latest deploy --prebuilt --prod --token "${VERCEL_TOKEN}"
